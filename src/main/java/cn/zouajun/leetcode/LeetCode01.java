@@ -3,7 +3,7 @@ package cn.zouajun.leetcode;
 public class LeetCode01 {
 
 
-//    将一个给定字符串 s 根据给定的行数 numRows ，以从上往下、从左到右进行 Z 字形排列。
+//    将一个给定字符串 s 根据给定的行数 numRows ，以从上往下、从左到右进行 Z 字形排列。
 //
 //    比如输入字符串为 "PAYPALISHIRING" 行数为 3 时，排列如下：
 //
@@ -55,7 +55,36 @@ public class LeetCode01 {
 
     public String convert(String s, int numRows){
 
-        String[][] map;
+        char[] char_s = new char[s.length()];
+        s.getChars(0,s.length(),char_s,0);
+
+        char[][] map = new char[s.length()][numRows];
+
+        int j = 0;
+        int k = 0;
+        int fx = 0;//0下，1上
+
+        for (int i = 0; i < s.length(); i++) {
+
+            map[j][k] = char_s[i];
+
+            if(fx == 0 && k >= numRows -1){
+                fx = 1;
+            }else if(fx == 1 && k <= 0){
+                fx = 0;
+            }
+
+            if(fx == 0){
+                k++;
+            }
+
+            if(fx == 1) {
+                k--;
+                j++;
+            }
+        }
+
+
 
 
         return "";
