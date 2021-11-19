@@ -44,8 +44,8 @@ public class LeetCode01 {
 
     public static void main(String[] args) {
 
-        String s = "PAYPALISHIRING";
-        int numRow = 3;
+        String s = "ABC";
+        int numRow = 1;
 
         LeetCode01 leetCode01 = new LeetCode01();
         System.out.println(leetCode01.convert(s, numRow));
@@ -55,39 +55,50 @@ public class LeetCode01 {
 
     public String convert(String s, int numRows){
 
+        if(numRows == 1){
+            return s;
+        }
+
         char[] char_s = new char[s.length()];
         s.getChars(0,s.length(),char_s,0);
 
-        char[][] map = new char[s.length()][numRows];
+        char[][] map = new char[numRows][s.length()];
 
-        int j = 0;
-        int k = 0;
+        int j = 0;//行
+        int k = 0;//列
         int fx = 0;//0下，1上
 
         for (int i = 0; i < s.length(); i++) {
 
             map[j][k] = char_s[i];
 
-            if(fx == 0 && k >= numRows -1){
+            if(fx == 0 && j >= numRows -1){
                 fx = 1;
-            }else if(fx == 1 && k <= 0){
+            }else if(fx == 1 && j <= 0){
                 fx = 0;
             }
 
             if(fx == 0){
-                k++;
+                j++;
             }
 
             if(fx == 1) {
-                k--;
-                j++;
+                j = j-1 <0 ? 0:j-1;
+                k++;
+            }
+        }
+
+        StringBuffer sb = new StringBuffer();
+        for (j = 0; j < numRows; j++) {
+            for (k = 0; k < s.length() ; k++){
+                if (map[j][k] != '\u0000'){
+                    sb.append(map[j][k]);
+                }
             }
         }
 
 
-
-
-        return "";
+        return sb.toString();
     }
 
 
