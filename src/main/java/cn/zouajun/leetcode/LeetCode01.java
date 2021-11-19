@@ -55,7 +55,7 @@ public class LeetCode01 {
 
     public String convert(String s, int numRows){
 
-
+        String[][] map;
 
 
         return "";
